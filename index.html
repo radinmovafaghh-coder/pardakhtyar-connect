@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pardakhtyar Connect — درگاه کارت‌به‌کارت هوشمند</title>
+<meta name="description" content="کتابخانهٔ رسمی اتصال سایت شما به پرداختیار. پرداخت کارت‌به‌کارت با تطبیق خودکار واریز، بدون درگاه بانکی.">
+<meta property="og:title" content="Pardakhtyar Connect">
+<meta property="og:description" content="پرداخت کارت‌به‌کارت هوشمند — تطبیق خودکار واریز، بدون درگاه بانکی.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+<style>
+:root{
+  --navy:#0D2340; --navy2:#14213D; --blue:#307FE2; --blue-l:#5B9EF0;
+  --gold:#C99700; --ink:#0F172A; --grey:#64748B; --grey-l:#94A3B8;
+  --hair:#E2E8F0; --bg:#FFFFFF; --bg2:#F8FAFC; --code:#0B1220;
+  --ok:#059669; --radius:14px;
+  --font:'Vazirmatn','Segoe UI',Tahoma,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font);background:var(--bg);color:var(--ink);
+  line-height:1.85;-webkit-font-smoothing:antialiased;
+}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* ── نوار بالا ── */
+nav{
+  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--hair);
+}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;color:var(--navy)}
+.brand svg{width:28px;height:28px}
+nav ul{display:flex;gap:26px;list-style:none;font-size:14px;font-weight:500}
+nav ul a{color:var(--grey)}
+nav ul a:hover{color:var(--navy);text-decoration:none}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:10px;
+  font-weight:700;font-size:14px;transition:.18s;border:none;cursor:pointer;font-family:var(--font);
+}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:var(--navy2);text-decoration:none;transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--hair)}
+.btn-ghost:hover{border-color:var(--navy);text-decoration:none}
+
+/* ── قهرمان ── */
+.hero{
+  padding:88px 0 72px;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#fff 0%,var(--bg2) 100%);
+}
+.hero::before{
+  content:'';position:absolute;top:-180px;left:-140px;width:520px;height:520px;
+  background:radial-gradient(circle,rgba(48,127,226,.10),transparent 68%);border-radius:50%;
+}
+.hero .wrap{position:relative}
+.badge{
+  display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:100px;
+  background:rgba(48,127,226,.09);color:var(--blue);font-size:12.5px;font-weight:700;
+  margin-bottom:22px;border:1px solid rgba(48,127,226,.18);
+}
+.badge .dot{width:6px;height:6px;border-radius:50%;background:var(--ok)}
+h1{
+  font-size:clamp(30px,5vw,50px);font-weight:800;line-height:1.28;
+  letter-spacing:-.02em;color:var(--navy);margin-bottom:20px;max-width:760px;
+}
+h1 em{font-style:normal;color:var(--blue)}
+.lead{font-size:17px;color:var(--grey);max-width:620px;margin-bottom:34px;line-height:1.9}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.hint{font-size:13px;color:var(--grey-l)}
+
+/* ── نوار آمار ── */
+.stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:1px;background:var(--hair);border:1px solid var(--hair);
+  border-radius:var(--radius);overflow:hidden;margin-top:56px;
+}
+.stat{background:#fff;padding:24px 22px}
+.stat b{display:block;font-size:26px;font-weight:800;color:var(--navy);line-height:1.3}
+.stat span{font-size:13px;color:var(--grey)}
+
+/* ── بخش‌ها ── */
+section{padding:76px 0}
+section.alt{background:var(--bg2);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.sec-head{margin-bottom:44px;max-width:640px}
+.sec-tag{
+  font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:10px;
+}
+h2{font-size:clamp(23px,3.4vw,33px);font-weight:800;color:var(--navy);letter-spacing:-.015em;line-height:1.4}
+.sec-head p{color:var(--grey);margin-top:12px;font-size:15.5px}
+
+/* ── کارت‌ها ── */
+.grid{display:grid;gap:20px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.card{
+  background:#fff;border:1px solid var(--hair);border-radius:var(--radius);
+  padding:28px 26px;transition:.2s;
+}
+.card:hover{border-color:#CBD5E1;box-shadow:0 10px 30px -12px rgba(13,35,64,.13);transform:translateY(-2px)}
+.card .ico{
+  width:44px;height:44px;border-radius:11px;background:rgba(48,127,226,.09);
+  display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+}
+.card .ico svg{width:22px;height:22px;stroke:var(--blue);fill:none;stroke-width:1.9}
+.card h3{font-size:16.5px;font-weight:700;color:var(--navy);margin-bottom:9px}
+.card p{font-size:14px;color:var(--grey);line-height:1.8}
+
+/* ── جریان ── */
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0;margin-top:12px}
+.step{position:relative;padding:0 26px 0 0}
+.step:not(:last-child)::after{
+  content:'';position:absolute;top:19px;left:0;width:calc(100% - 52px);
+  height:2px;background:linear-gradient(90deg,var(--hair),transparent);
+}
+.step .num{
+  width:38px;height:38px;border-radius:50%;background:var(--navy);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;
+  font-size:15px;margin-bottom:16px;position:relative;z-index:1;
+}
+.step h4{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:7px}
+.step p{font-size:13.5px;color:var(--grey);line-height:1.75}
+
+/* ── کد ── */
+.tabs{display:flex;gap:6px;margin-bottom:-1px;flex-wrap:wrap}
+.tab{
+  padding:9px 18px;border-radius:9px 9px 0 0;border:1px solid transparent;
+  background:transparent;color:var(--grey);font-size:13.5px;font-weight:600;
+  cursor:pointer;font-family:var(--font);transition:.15s;
+}
+.tab.on{background:var(--code);color:#E2E8F0;border-color:var(--code)}
+.tab:not(.on):hover{color:var(--navy);background:rgba(13,35,64,.04)}
+.codebox{
+  background:var(--code);border-radius:0 var(--radius) var(--radius) var(--radius);
+  overflow:hidden;border:1px solid #1E293B;
+}
+.codebox pre{
+  padding:24px 22px;overflow-x:auto;font-size:13px;line-height:1.85;
+  direction:ltr;text-align:left;font-family:'SF Mono',Menlo,Consolas,monospace;
+}
+.codebox code{color:#E2E8F0}
+.tok-key{color:#7DD3FC}
+.tok-str{color:#A5E887}
+.tok-com{color:#64748B;font-style:italic}
+.tok-fn{color:#FDE68A}
+.tok-num{color:#FCA5A5}
+.pane{display:none}
+.pane.on{display:block}
+
+/* ── جدول API ── */
+.tablewrap{overflow-x:auto;border:1px solid var(--hair);border-radius:var(--radius)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:#fff}
+th,td{padding:13px 16px;text-align:right;border-bottom:1px solid var(--hair)}
+th{background:var(--bg2);font-weight:700;color:var(--navy);font-size:12.5px;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td code{
+  background:var(--bg2);padding:2px 7px;border-radius:5px;font-size:12.5px;
+  font-family:'SF Mono',Menlo,monospace;direction:ltr;display:inline-block;color:var(--navy);
+}
+.method{
+  display:inline-block;padding:2px 8px;border-radius:5px;font-size:11px;
+  font-weight:800;font-family:monospace;direction:ltr;
+}
+.m-post{background:rgba(5,150,105,.12);color:#047857}
+.m-get{background:rgba(48,127,226,.12);color:#1D4ED8}
+
+/* ── هشدار ── */
+.note{
+  display:flex;gap:14px;padding:18px 20px;border-radius:12px;
+  background:rgba(201,151,0,.07);border:1px solid rgba(201,151,0,.24);
+  margin:26px 0;font-size:14px;color:#7C5A00;line-height:1.8;
+}
+.note svg{width:20px;height:20px;flex-shrink:0;margin-top:3px;stroke:var(--gold);fill:none;stroke-width:2}
+.note b{color:#5C4200}
+
+/* ── فراخوان ── */
+.cta{
+  background:var(--navy);border-radius:20px;padding:56px 44px;text-align:center;
+  color:#fff;position:relative;overflow:hidden;
+}
+.cta::before{
+  content:'';position:absolute;top:-100px;right:-100px;width:340px;height:340px;
+  background:radial-gradient(circle,rgba(48,127,226,.28),transparent 70%);border-radius:50%;
+}
+.cta h2{color:#fff;position:relative;margin-bottom:14px}
+.cta p{color:#94A3B8;max-width:520px;margin:0 auto 30px;position:relative;font-size:15.5px}
+.cta .btn-primary{background:#fff;color:var(--navy);position:relative}
+.cta .btn-primary:hover{background:#F1F5F9}
+.cta .btn-ghost{color:#fff;border-color:rgba(255,255,255,.28);position:relative}
+.cta .btn-ghost:hover{border-color:#fff}
+
+/* ── پانویس ── */
+footer{border-top:1px solid var(--hair);padding:44px 0 36px;background:var(--bg2)}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.foot .brand{font-size:15px}
+.foot nav ul{gap:20px;font-size:13px}
+.copy{font-size:12.5px;color:var(--grey-l);margin-top:22px;text-align:center}
+
+@media(max-width:720px){
+  nav ul{display:none}
+  .hero{padding:60px 0 48px}
+  section{padding:56px 0}
+  .cta{padding:40px 24px}
+  .step{padding:0 0 28px}
+  .step:not(:last-child)::after{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" fill="none">
+        <rect width="32" height="32" rx="8" fill="#0D2340"/>
+        <path d="M10 9h12M10 16h8M10 23h12" stroke="#C99700" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Pardakhtyar Connect
+    </div>
+    <ul>
+      <li><a href="#how">چطور کار می‌کند</a></li>
+      <li><a href="#quickstart">شروع سریع</a></li>
+      <li><a href="#api">API</a></li>
+      <li><a href="#faq">سؤالات</a></li>
+    </ul>
+    <a href="#quickstart" class="btn btn-primary">شروع کنید</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="badge"><span class="dot"></span> نسخهٔ ۱.۰.۰ — آمادهٔ استفاده</div>
+    <h1>پرداخت کارت‌به‌کارت، <em>خودکار</em> و بدون درگاه بانکی</h1>
+    <p class="lead">
+      مشتری کارت‌به‌کارت می‌کند، سیستم واریز را از پیامک بانک می‌خواند و سفارش را
+      خودش تأیید می‌کند. شما فقط یک کلید API می‌گیرید و سه خط کد اضافه می‌کنید.
+    </p>
+    <div class="hero-cta">
+      <a href="#quickstart" class="btn btn-primary">شروع سریع</a>
+      <a href="#api" class="btn btn-ghost">مستندات API</a>
+    </div>
+    <p class="hint">PHP · Node.js · Python — بدون وابستگی سنگین</p>
+
+    <div class="stats">
+      <div class="stat"><b>۳</b><span>کتابخانهٔ رسمی</span></div>
+      <div class="stat"><b>۵۵</b><span>تست خودکار</span></div>
+      <div class="stat"><b>۰</b><span>درگاه بانکی لازم</span></div>
+      <div class="stat"><b>HMAC</b><span>امضای هر درخواست</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">جریان کار</div>
+      <h2>چهار قدم از خرید تا تأیید</h2>
+      <p>هیچ webhook ای لازم نیست. تأیید با استعلام سمت سرور انجام می‌شود، پس کاربر می‌تواند صفحه را ببندد.</p>
+    </div>
+
+    <div class="flow">
+      <div class="step">
+        <div class="num">۱</div>
+        <h4>سفارش بساز</h4>
+        <p>مبلغ و عنوان را می‌فرستی. سیستم یک مبلغ یکتا با اختلاف چند ریال برمی‌گرداند.</p>
+      </div>
+      <div class="step">
+        <div class="num">۲</div>
+        <h4>مشتری را بفرست</h4>
+        <p>لینک پرداخت را باز می‌کنی. مشتری کارت‌به‌کارت می‌کند و مبلغ دقیق را واریز می‌کند.</p>
+      </div>
+      <div class="step">
+        <div class="num">۳</div>
+        <h4>واریز تطبیق می‌خورد</h4>
+        <p>پیامک بانک خوانده می‌شود و مبلغ یکتا به سفارش درست وصل می‌شود.</p>
+      </div>
+      <div class="step">
+        <div class="num">۴</div>
+        <h4>وضعیت را بگیر</h4>
+        <p>با یک درخواست <code>GET</code> ببین <code>paid</code> شده یا نه. تمام.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">چرا این روش</div>
+      <h2>بدون واسطه، بدون کارمزد درگاه</h2>
+      <p>پول مستقیم به حساب خودت می‌رود. نه تسویه‌ای در کار است، نه کارمزدی.</p>
+    </div>
+
+    <div class="grid g3">
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/></svg></div>
+        <h3>تطبیق خودکار</h3>
+        <p>مبلغ یکتا تضمین می‌کند واریز به سفارش درست وصل شود، حتی وقتی چند سفارش همزمان باز است.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>امضای HMAC</h3>
+        <p>هر درخواست با HMAC-SHA256 امضا می‌شود. پنجرهٔ زمانی ۳۰۰ ثانیه و nonce یکتا جلوی replay را می‌گیرد.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-6.2-8.6M21 3v6h-6"/></svg></div>
+        <h3>بدون webhook</h3>
+        <p>اگر سرور شما لحظه‌ای خاموش باشد، هیچ پرداختی گم نمی‌شود. استعلام همیشه وضعیت واقعی را می‌دهد.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></div>
+        <h3>idempotency</h3>
+        <p>با <code>external_ref</code> هر بار همان سفارش برمی‌گردد. دوبار کلیک کردن سفارش دوم نمی‌سازد.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M9 9h6v6H9z"/></svg></div>
+        <h3>بدون وابستگی</h3>
+        <p>PHP فقط cURL می‌خواهد. Node از <code>fetch</code> بومی استفاده می‌کند. Python فقط کتابخانهٔ استاندارد.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg></div>
+        <h3>شفاف</h3>
+        <p>وضعیت‌ها صریح‌اند: <code>pending</code>، <code>paid</code>، <code>expired</code>، <code>canceled</code>. هیچ حدس و گمانی نیست.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="quickstart">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">شروع سریع</div>
+      <h2>سه خط تا اولین پرداخت</h2>
+      <p>کلید API را از پنل پرداختیار بگیر: <b>تنظیمات → کلیدهای API</b>. سپس:</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab on" data-pane="php">PHP</button>
+      <button class="tab" data-pane="node">Node.js</button>
+      <button class="tab" data-pane="py">Python</button>
+    </div>
+
+    <div class="codebox">
+      <div class="pane on" id="pane-php"><pre><code><span class="tok-com">// نصب: فایل Connect.php را کنار پروژه بگذارید</span>
+<span class="tok-key">require</span> <span class="tok-str">'sdk/php/Connect.php'</span>;
+
+<span class="tok-key">$pay</span> = <span class="tok-key">new</span> <span class="tok-fn">Pardakhtyar\Connect</span>(
+    <span class="tok-str">'https://pay.lenvato.ir'</span>,
+    <span class="tok-str">'ak_...'</span>,   <span class="tok-com">// کلید API</span>
+    <span class="tok-str">'...'</span>       <span class="tok-com">// کلید مخفی — در متغیر محیطی</span>
+);
+
+<span class="tok-key">$order</span> = <span class="tok-key">$pay</span>-><span class="tok-fn">createOrder</span>([
+    <span class="tok-str">'amount'</span>       => <span class="tok-num">250000</span>,          <span class="tok-com">// تومان</span>
+    <span class="tok-str">'title'</span>        => <span class="tok-str">'اشتراک ماهانه'</span>,
+    <span class="tok-str">'external_ref'</span> => <span class="tok-str">'INV-1001'</span>,      <span class="tok-com">// جلوگیری از تکرار</span>
+]);
+
+<span class="tok-fn">header</span>(<span class="tok-str">'Location: '</span> . <span class="tok-key">$order</span>[<span class="tok-str">'pay_url'</span>]);</code></pre></div>
+
+      <div class="pane" id="pane-node"><pre><code><span class="tok-com">// نصب: فایل connect.js را کپی کنید — بدون npm install</span>
+<span class="tok-key">const</span> { Connect } = <span class="tok-fn">require</span>(<span class="tok-str">'./sdk/node/connect'</span>);
+
+<span class="tok-key">const</span> pay = <span class="tok-key">new</span> <span class="tok-fn">Connect</span>({
+  baseUrl: <span class="tok-str">'https://pay.lenvato.ir'</span>,
+  keyId: process.env.<span class="tok-key">PAY_KEY_ID</span>,
+  secret: process.env.<span class="tok-key">PAY_SECRET</span>,
+});
+
+<span class="tok-key">const</span> order = <span class="tok-key">await</span> pay.<span class="tok-fn">createOrder</span>({
+  amount: <span class="tok-num">250000</span>,
+  title: <span class="tok-str">'اشتراک ماهانه'</span>,
+  external_ref: <span class="tok-str">'INV-1001'</span>,
+});
+
+res.<span class="tok-fn">redirect</span>(order.pay_url);</code></pre></div>
+
+      <div class="pane" id="pane-py"><pre><code><span class="tok-com"># نصب: فایل pardakhtyar_connect.py را کپی کنید</span>
+<span class="tok-key">from</span> pardakhtyar_connect <span class="tok-key">import</span> Connect
+
+pay = <span class="tok-fn">Connect</span>(
+    base_url=<span class="tok-str">'https://pay.lenvato.ir'</span>,
+    key_id=os.environ[<span class="tok-str">'PAY_KEY_ID'</span>],
+    secret=os.environ[<span class="tok-str">'PAY_SECRET'</span>],
+)
+
+order = pay.<span class="tok-fn">create_order</span>(
+    amount=<span class="tok-num">250_000</span>,
+    title=<span class="tok-str">'اشتراک ماهانه'</span>,
+    external_ref=<span class="tok-str">'INV-1001'</span>,
+)
+
+<span class="tok-fn">print</span>(order[<span class="tok-str">'pay_url'</span>])</code></pre></div>
+    </div>
+
+    <div class="note">
+      <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
+      <div>
+        <b>مهم:</b> مشتری باید <b>مبلغ دقیق</b> را واریز کند، نه مبلغ گرد.
+        اختلاف چند ریالی همان چیزی است که واریز را به سفارش درست وصل می‌کند.
+        اگر مبلغ را گرد کند، تطبیق انجام نمی‌شود و تراکنش در صف «بررسی دستی» می‌ماند.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="api">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">مرجع API</div>
+      <h2>پنج اندپوینت، همین</h2>
+      <p>همهٔ درخواست‌ها JSON هستند. مسیر پایه: <code>https://pay.lenvato.ir</code></p>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>متد</th><th>مسیر</th><th>کار</th><th>احراز هویت</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="method m-post">POST</span></td>
+            <td><code>/api/v1/orders</code></td>
+            <td>ساخت سفارش با مبلغ یکتا</td>
+            <td>بله</td>
+          </tr>
+          <tr>
+            <td><span class="method m-get">GET</span></td>
+            <td><code>/api/v1/orders/{code}</code></td>
+            <td>جزئیات سفارش</td>
+            <td>بله</td>
+          </tr>
+          <tr>
+            <td><span class="method m-get">GET</span></td>
+            <td><code>/api/v1/status/{ref}</code></td>
+            <td>استعلام وضعیت — کد سفارش یا <code>external_ref</code></td>
+            <td>بله</td>
+          </tr>
+          <tr>
+            <td><span class="method m-post">POST</span></td>
+            <td><code>/api/v1/links</code></td>
+            <td>ساخت لینک پرداخت بدون سفارش</td>
+            <td>بله</td>
+          </tr>
+          <tr>
+            <td><span class="method m-get">GET</span></td>
+            <td><code>/api/v1/public/status/{token}</code></td>
+            <td>وضعیت عمومی لینک — برای صفحهٔ مشتری</td>
+            <td>خیر</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin:36px 0 14px;font-size:17px;color:var(--navy)">هدرهای احراز هویت</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>هدر</th><th>مقدار</th></tr></thead>
+        <tbody>
+          <tr><td><code>X-Api-Key</code></td><td>شناسهٔ کلید، مثل <code>ak_ac7de27e0d74</code></td></tr>
+          <tr><td><code>X-Api-Signature</code></td><td><code>HMAC-SHA256(timestamp + "\n" + nonce + "\n" + raw_body, secret)</code></td></tr>
+          <tr><td><code>X-Api-Timestamp</code></td><td>زمان یونیکس — حداکثر ۳۰۰ ثانیه اختلاف</td></tr>
+          <tr><td><code>X-Api-Nonce</code></td><td>رشتهٔ تصادفی یکتا در هر درخواست</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin:36px 0 14px;font-size:17px;color:var(--navy)">پاسخ ساخت سفارش</h3>
+    <div class="codebox" style="border-radius:var(--radius)">
+      <pre><code>{
+  <span class="tok-key">"ok"</span>: <span class="tok-num">true</span>,
+  <span class="tok-key">"order"</span>: {
+    <span class="tok-key">"code"</span>: <span class="tok-str">"ORD-261030-E72F2"</span>,
+    <span class="tok-key">"amount_rial"</span>: <span class="tok-num">2500137</span>,
+    <span class="tok-key">"base_amount_rial"</span>: <span class="tok-num">2500000</span>,
+    <span class="tok-key">"unique_offset_rial"</span>: <span class="tok-num">137</span>,
+    <span class="tok-key">"status"</span>: <span class="tok-str">"pending"</span>,
+    <span class="tok-key">"expires_at"</span>: <span class="tok-str">"2026-10-30 14:30:00"</span>,
+    <span class="tok-key">"pay_url"</span>: <span class="tok-str">"https://pay.lenvato.ir/p/6636b47f..."</span>
+  }
+}</code></pre>
+    </div>
+
+    <h3 style="margin:36px 0 14px;font-size:17px;color:var(--navy)">کدهای خطا</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>کد</th><th>HTTP</th><th>معنی</th></tr></thead>
+        <tbody>
+          <tr><td><code>missing_auth</code></td><td>401</td><td>هدرهای احراز هویت ناقص است</td></tr>
+          <tr><td><code>invalid_key</code></td><td>401</td><td>کلید API وجود ندارد یا غیرفعال است</td></tr>
+          <tr><td><code>bad_signature</code></td><td>401</td><td>امضا مطابقت ندارد</td></tr>
+          <tr><td><code>timestamp_expired</code></td><td>401</td><td>اختلاف ساعت بیش از ۳۰۰ ثانیه</td></tr>
+          <tr><td><code>invalid_amount</code></td><td>422</td><td>مبلغ کمتر از ۱۰۰۰ تومان</td></tr>
+          <tr><td><code>missing_title</code></td><td>422</td><td>عنوان سفارش خالی است</td></tr>
+          <tr><td><code>not_found</code></td><td>404</td><td>سفارش یا لینک پیدا نشد</td></tr>
+          <tr><td><code>rate_limited</code></td><td>429</td><td>بیش از حد مجاز درخواست</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">سؤالات متداول</div>
+      <h2>چیزهایی که معمولاً می‌پرسند</h2>
+    </div>
+
+    <div class="grid g3">
+      <div class="card">
+        <h3>اگر کاربر صفحه را ببندد؟</h3>
+        <p>مشکلی نیست. تأیید به بازگشت کاربر وابسته نیست — سرور شما هر وقت بخواهد استعلام می‌گیرد.</p>
+      </div>
+      <div class="card">
+        <h3>اگر مبلغ را گرد کند؟</h3>
+        <p>سفارش تأیید نمی‌شود. تراکنش در صف «بررسی دستی» می‌ماند تا خودتان وصلش کنید.</p>
+      </div>
+      <div class="card">
+        <h3>چند سفارش همزمان؟</h3>
+        <p>هر تعداد. مبلغ یکتا برای هر سفارش جدا محاسبه می‌شود، پس تطبیق اشتباه نمی‌شود.</p>
+      </div>
+      <div class="card">
+        <h3>کلید مخفی کجا نگه دارم؟</h3>
+        <p>فقط در متغیر محیطی. هرگز در کد، در مخزن گیت، یا در جاوااسکریپت سمت مرورگر.</p>
+      </div>
+      <div class="card">
+        <h3>آیا webhook دارد؟</h3>
+        <p>نه. طراحی عمداً polling است تا اگر سرور شما قطع شد، پرداختی گم نشود.</p>
+      </div>
+      <div class="card">
+        <h3>چه بانک‌هایی؟</h3>
+        <p>هر بانکی که پیامک واریز بفرستد. تطبیق بر اساس متن پیامک و مبلغ انجام می‌شود.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta">
+      <h2>آماده‌اید وصل کنید؟</h2>
+      <p>کلید API را از پنل بگیرید، کتابخانه را کپی کنید، سه خط کد اضافه کنید.</p>
+      <a href="https://pay.lenvato.ir" class="btn btn-primary">ورود به پنل</a>
+      <a href="#quickstart" class="btn btn-ghost">مشاهدهٔ کد</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="brand">
+        <svg viewBox="0 0 32 32" fill="none" style="width:24px;height:24px">
+          <rect width="32" height="32" rx="8" fill="#0D2340"/>
+          <path d="M10 9h12M10 16h8M10 23h12" stroke="#C99700" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+        Pardakhtyar Connect
+      </div>
+      <nav><ul>
+        <li><a href="https://pay.lenvato.ir">پنل</a></li>
+        <li><a href="https://lenvato.ir">لنواتو</a></li>
+        <li><a href="https://github.com/radinmovafaghh-coder">GitHub</a></li>
+      </ul></nav>
+    </div>
+    <p class="copy">MIT License · ساخته‌شده برای پرداخت‌یار</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.tab').forEach(function (t) {
+  t.addEventListener('click', function () {
+    document.querySelectorAll('.tab').forEach(function (x) { x.classList.remove('on'); });
+    document.querySelectorAll('.pane').forEach(function (x) { x.classList.remove('on'); });
+    t.classList.add('on');
+    document.getElementById('pane-' + t.dataset.pane).classList.add('on');
+  });
+});
+</script>
+
+</body>
+</html>
