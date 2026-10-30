@@ -8,12 +8,9 @@
 [![PHP](https://img.shields.io/badge/PHP-8.0%2B-777BB4?logo=php&logoColor=white)](https://www.php.net/)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Tests](https://img.shields.io/badge/tests-55%20passing-059669.svg)](#تستها)
 
 کتابخانهٔ رسمی اتصال سایت شما به [پرداختیار](https://pay.lenvato.ir) — سیستم پرداخت کارت‌به‌کارت
 با تطبیق خودکار واریز.
-
-<img src="docs/screenshots/hero.png" alt="Pardakhtyar Connect" width="100%">
 
 </div>
 
@@ -35,6 +32,8 @@
 ---
 
 ## نصب
+
+فقط یک فایل لازم است — فایل زبان خودت را کنار پروژه بگذار.
 
 ### PHP
 
@@ -226,47 +225,19 @@ $pay = new Connect($url, 'ak_...', 'secret_here');
 
 ---
 
-## تست‌ها
-
-```bash
-# سرور تست محلی
-php -S 127.0.0.1:8977 -t examples examples/test-server.php
-
-# PHP — ۱۹ تست
-php tests/test-php.php
-
-# Node.js — ۱۸ تست
-node tests/test-node.js
-
-# Python — ۱۸ تست
-python3 tests/test-python.py
-```
-
-پوشش: ساخت سفارش، idempotency، استعلام، لینک، وضعیت عمومی،
-امضای غلط، کلید نامعتبر، مبلغ کم، سفارش ناموجود، انتظار پرداخت، خطای شبکه.
-
----
-
 ## ساختار
 
 ```
-pay-connect/
+pardakhtyar-connect/
 ├── sdk/
-│   ├── php/Connect.php              کلاینت PHP
-│   ├── node/connect.js              کلاینت Node.js
+│   ├── php/Connect.php               کلاینت PHP
+│   ├── node/connect.js               کلاینت Node.js
 │   └── python/pardakhtyar_connect.py کلاینت Python
-├── examples/
-│   ├── php-checkout.php             نمونهٔ فروشگاه PHP
-│   ├── node-checkout.js             نمونهٔ فروشگاه Node
-│   ├── python-checkout.py           نمونهٔ فروشگاه Python
-│   └── test-server.php              سرور تست (شبیه‌ساز API)
-├── tests/
-│   ├── test-php.php
-│   ├── test-node.js
-│   └── test-python.py
 ├── docs/
-│   └── API.md
-└── index.html                        صفحهٔ فرود
+│   └── API.md                        مرجع کامل API
+├── assets/
+│   └── mark.svg                      نشان
+└── index.html                        صفحهٔ معرفی
 ```
 
 ---
